@@ -7,8 +7,9 @@ const { readFileSync } = require('fs')
 const { join } = require('path')
 const resolvers = require('./lib/resolvers')
 
+const { db } = require('./config/index')
+
 const app = express()
-const port = process.env.port || 3000
 
 // Definiendo el schema
 const typeDefs = readFileSync(join(__dirname, 'lib', 'schema.graphql'), 'utf-8')
@@ -23,6 +24,6 @@ app.use(
   })
 )
 
-app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}/api`)
+app.listen(db.dbPort, () => {
+  console.log(`Server is listening at http://localhost:${db.dbPort}/api`)
 })
